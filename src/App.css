@@ -1,38 +1,369 @@
-.App {
-  text-align: center;
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  transition: all 0.5s linear;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
+.app {
+  background: radial-gradient(hsl(214, 47%, 23%), hsl(237, 49%, 15%));
   min-height: 100vh;
+  max-height: 100vh;
+  height: 100vh;
+  color: white;
+  padding: 20px 0;
+  overflow-x: hidden;
+  position: relative;
+  max-width: 1366px;
+  margin: 0 auto;
+  overflow-y: scroll;
+}
+
+.game {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-top: 30px;
+  align-items: center;
+  width: 100%;
+}
+
+.default-game {
+  background: url('./assets/images/bg-triangle.svg') no-repeat center;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-around;
+  width: 40%;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.default-game .component {
+  top: -30% !important;
+  transform: translateY(-20%);
+}
+
+.full-game {
+  background: url('./assets/images/bg-pentagon.svg') no-repeat center;
+  display: flex;
+  flex-direction: column;
+}
+
+.component {
+  width: 160px;
+  height: 160px;
+  background-color: #fff;
+  border-radius: 50%;
+  border: 20px solid var(--to-color);
+  box-shadow: 0px 6px 0px 0px var(--from-color),
+    inset 0px 6px 0px 0px rgba(0, 0, 0, 0.101);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  margin: 10px 30px;
+  position: relative;
+}
+
+.row-1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.row-2 {
+  justify-content: space-between;
+  top: -20px;
+  transform: translateY(-20px);
+}
+
+.row-2,
+.row-3 {
+  display: flex;
+  align-items: center;
+}
+
+.row-3 {
+  justify-content: space-around;
+  top: -20px;
+  transform: translateY(-20px);
+}
+
+
+
+
+.score {
+  border: 2px solid rgba(245, 245, 245, 0.444);
+  border-radius: 10px;
+  padding: 10px 20px;
+  width: 50%;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+.score-components {
+  font-size: 18px;
+  font-weight: 700;
+  color: white;
+  text-transform: uppercase;
+}
+
+.score-diplay {
+  padding: 10px 30px;
+  border-radius: 10px;
+  background-color: white;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  font-weight: 600;
+}
+
+.score-diplay span:nth-child(1) {
+  color: hsl(229, 64%, 46%);
+  font-size: 12px;
+}
+
+.score-diplay span:nth-child(2) {
+  color: hsl(229, 25%, 31%);
+  font-size: 32px;
+  font-weight: 700;
+}
+
+.answer {
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: 400;
+  font-size: 18px;
+}
+
+.game-answers {
+  padding: 50px 0;
+  width: 45%;
+  margin: 0 auto;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.answer-component {
+  background-color: rgba(0, 0, 0, 0.243);
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+}
+
+.answer .component {
+  width: 200px !important;
+  min-width: 200px !important;
+  height: 200px !important;
+  min-height: 200px !important;
+}
+
+.correct-answer {
+  --shadow-width: 60px;
+  box-shadow: 0 0 0 calc(var(--shadow-width) * 3) rgba(255, 255, 255, 0.05),
+    0 0 0 calc(var(--shadow-width) * 2) rgba(255, 255, 255, 0.055),
+    0 0 0 calc(var(--shadow-width)) rgba(255, 255, 255, 0.116);
+}
+
+.win-option {
+  margin: 0 50px;
+  min-width: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.win-option-title {
+  font-size: 38px;
+  text-transform: uppercase;
+}
+
+.play-btn {
+  border-radius: 6px;
+  margin-top: 20px;
+  background-color: white;
+  color: black;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  width: 100%;
+  padding: 10px 20px;
+}
+
+.games {
+  position: absolute;
+  bottom: 100px;
+  right: 40px;
+  width: 100px;
+}
+
+.btn-game {
+  border: 2px solid rgba(245, 245, 245, 0.501);
+  border-radius: 6px;
   color: white;
+  background-color: transparent;
+  outline: none;
+  box-shadow: none;
+  width: 100%;
+  padding: 6px 0;
+  cursor: pointer;
+  margin: 10px 0;
+  text-transform: uppercase;
 }
 
-.App-link {
-  color: #61dafb;
+.btn-game.active {
+  border: 2px solid hsl(237, 49%, 15%);
+  background: white;
+  color: hsl(229, 64%, 46%);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+
+.order-1 {
+  order: 1;
+}
+
+.order-2 {
+  order: 2;
+}
+
+.order-3 {
+  order: 3;
+}
+
+.rules-holder {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 500px;
+  height: 500px;
+  background-color: white;
+  border-radius: 20px;
+}
+
+.rules-holder-header {
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: hsl(229, 25%, 31%);
+  padding: 0 20px;
+}
+
+.close-btn {
+  border: none;
+  outline: none;
+  cursor: pointer;
+  background: none !important;
+}
+
+.close-btn img {
+  width: 30px;
+}
+
+.rules-holder-body {
+  display: flex;
+  justify-content: center;
+}
+
+
+@media screen and (max-width: 375px),
+(max-width: 768px) {
+  .score {
+    width: 99%;
   }
-  to {
-    transform: rotate(360deg);
+
+  .default-game,
+  .full-game {
+    width: 98%;
+  }
+
+  .default-game .component {
+    top: -30% !important;
+    transform: translateY(-20%);
+  }
+
+  .game-answers {
+    width: 98%;
+  }
+
+  .component {
+    width: 150px;
+    height: 150px;
+    margin: 10px;
+  }
+
+  .answer-component {
+    background-color: rgba(0, 0, 0, 0.243);
+    width: 90px;
+    height: 90px;
+  }
+
+  .answer .component {
+    width: 130px !important;
+    min-width: 130px !important;
+    height: 130px !important;
+    min-height: 130px !important;
+  }
+
+  .order-1 {
+    order: 1;
+  }
+
+  .order-2 {
+    order: 3;
+  }
+
+  .order-3 {
+    order: 2;
+  }
+
+  .answer {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  .win-option {
+    max-width: 100%;
+    width: 100%;
+    margin-top: 50px;
+  }
+
+  .games {
+    position: absolute;
+    bottom: 10px;
+    right: 0;
+    left: 0;
+    width: 100%;
+    padding: 0 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .btn-game {
+    width: 100px !important;
+    display: inline-block;
+  }
+
+  .rules-holder {
+    width: 95%;
+    height: 95%;
   }
 }
